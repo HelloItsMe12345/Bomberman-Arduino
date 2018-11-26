@@ -21,14 +21,18 @@
 int main(void);
 void beginScherm();
 void spel();
-void cIngedrukt();
+void lopen();
+void map();
 static void nunchuck_setpowerpins();
 void nunchuck_init();
 void nunchuck_send_request();
 int nunchuck_get_data();
 void nunchuck_print_data();
 char nunchuk_decode_byte (char x);
+int nunchuck_zbutton();
 int nunchuck_cbutton();
+int nunchuck_joyx();
+int nunchuck_joyy();
 
 #include "pins_arduino.h" 
 #include "arduino.h"
