@@ -21,6 +21,7 @@
 int main(void);
 void beginScherm();
 void spel();
+void border();
 void lopen();
 void map();
 void blockFunc(int xWall, int yWall);

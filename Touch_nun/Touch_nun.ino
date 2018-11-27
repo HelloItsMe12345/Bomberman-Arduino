@@ -19,15 +19,15 @@
 #define BoxY 10
 #define wallBox 20
 
-#define startX1 210
-#define startY1 90
-#define startX2 10
-#define startY2 290
+#define startX1 230
+#define startY1 70
+#define startX2 -10
+#define startY2 310
 
-#define leftUnderX 10
-#define leftUnderY 90
-#define rightAboveX 210
-#define rightAboveY 290
+#define leftUnderX -10
+#define leftUnderY 70
+#define rightAboveX 230
+#define rightAboveY 310
 
 #define STMPE_CS 8
 
@@ -38,8 +38,8 @@ int yBlock = 80;
 int spelOn = 0;
 int c_knop;
 int z_knop; 
-int currentX = startX1;
-int currentY = startY1;
+int currentX = startX1 - 20;
+int currentY = startY1 + 20;
 int getal;
 int bomX;
 int bomY;
@@ -52,8 +52,7 @@ Adafruit_STMPE610 ts = Adafruit_STMPE610(STMPE_CS);
 Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC);
 
 
-int main(void)
-{
+int main(void){
 	init();
 	
 	nunchuck_setpowerpins();
@@ -67,9 +66,8 @@ int main(void)
 		while (1);
 	}
 	tft.begin();
-	beginScherm();
 	
-	sei();
+	beginScherm();
 
 	while (1){	
 		nunchuck_get_data();
@@ -81,7 +79,9 @@ int main(void)
 		
 		if(((p.x != -8 || p.y != -11) || c_knop == 0) && spelOn == 0){
 			spel();
+			border();
 			map();
+			tft.fillRect(currentX, currentY, 20, 20, ILI9341_YELLOW);
 			spelOn = 1;
 		} 
 
@@ -91,7 +91,7 @@ int main(void)
 		}
 		
 		if (bomDropped == 1){
-			tft.fillRect(bomX, bomY, 20, 20, ILI9341_RED);
+			tft.fillRect(bomX, bomY, 20, 20, ILI9341_RED);			
 		}
 	}
 }
@@ -138,13 +138,15 @@ void spel(){
 	tft.print("0");
 	tft.setCursor(30,170);
 	tft.print("x");
-	tft.setRotation(0);
-	
+	tft.setRotation(0);	
+}
+
+void border(){
 	for (int i = 0; i < 4; i++){
 		for (int up = 0; up < 23; up++){
 			xBlock = xBlock + 10;
 			tft.fillRect(xBlock,yBlock,BoxX,BoxY,ILI9341_WHITE);
-		}			
+		}
 		for (int right = 0; right < 23; right++){
 			yBlock = yBlock + 10;
 			tft.fillRect(xBlock,yBlock,BoxX,BoxY,ILI9341_WHITE);
@@ -156,9 +158,8 @@ void spel(){
 		for (int left = 0; left < 23; left++){
 			yBlock = yBlock - 10;
 			tft.fillRect(xBlock,yBlock,BoxX,BoxY,ILI9341_WHITE);
-		}		
+		}
 	}
-		
 }
 
 void lopen(){
@@ -181,6 +182,9 @@ void lopen(){
 	}
 	if (getal > 20 && bomDropped == 1){
 		bomDropped = 0;
+		if((currentX == bomX && currentY == bomY) || (currentX == (bomX+20) && currentY == bomY) || (currentX == (bomX-20) && currentY == bomY) || (currentX == bomX && currentY == (bomY+20)) || (currentX == bomX && currentY == (bomY-20))){
+			Serial.println("u ded");
+		}
 		tft.fillRect(bomX, bomY, 20, 20, ILI9341_ORANGE);
 		tft.fillRect(bomX + 20, bomY, 20, 20, ILI9341_ORANGE);
 		tft.fillRect(bomX - 20, bomY, 20, 20, ILI9341_ORANGE);
@@ -192,6 +196,7 @@ void lopen(){
 		tft.fillRect(bomX - 20, bomY, 20, 20, ILI9341_BLACK);
 		tft.fillRect(bomX, bomY + 20, 20, 20, ILI9341_BLACK);
 		tft.fillRect(bomX, bomY - 20, 20, 20, ILI9341_BLACK);
+		border();
 		
 	}
 	if (z_knop == 0 && getal > 20 && bomDropped == 0){
