@@ -71,8 +71,7 @@ int main(void)
 	
 	sei();
 
-	while (1) //infinite loop
-	{	
+	while (1){	
 		nunchuck_get_data();
 		nunchuck_print_data();
 		
@@ -94,16 +93,6 @@ int main(void)
 		if (bomDropped == 1){
 			tft.fillRect(bomX, bomY, 20, 20, ILI9341_RED);
 		}
-		
-		Serial.println(getal);
-		
-// 		Serial.print(x);
-// 		Serial.print("\t");
-// 		Serial.println(y);
-		
-// 		Serial.print(p.x);
-// 		Serial.print("\t");
-// 		Serial.println(p.y);
 	}
 }
 
@@ -215,14 +204,18 @@ void lopen(){
 }
 
 void map(){
-	tft.fillRect( 190, 190, wallBox, wallBox, ILI9341_GREEN);
-	tft.fillRect( 170, 170, wallBox, wallBox, ILI9341_GREEN);
-	tft.fillRect( 150, 150, wallBox, wallBox, ILI9341_GREEN);
-	tft.fillRect( 130, 130, wallBox, wallBox, ILI9341_GREEN);
-	tft.fillRect( 190, 170, wallBox, wallBox, ILI9341_GREEN);
-	tft.fillRect( 170, 130, wallBox, wallBox, ILI9341_GREEN);
-	tft.fillRect( 150, 130, wallBox, wallBox, ILI9341_GREEN);
-	tft.fillRect( 130, 150, wallBox, wallBox, ILI9341_GREEN);	
+	blockFunc(190, 190);
+	blockFunc(170, 170);
+	blockFunc(150, 150);
+	blockFunc(130, 130);
+	blockFunc(190, 170);
+	blockFunc(170, 130);
+	blockFunc(150, 130);
+	blockFunc(130, 150);	
+}
+
+void blockFunc(int xWall, int yWall){
+	tft.fillRect(xWall, yWall, wallBox, wallBox, ILI9341_GREEN);
 }
 
 static void nunchuck_setpowerpins(){

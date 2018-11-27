@@ -23,6 +23,7 @@ void beginScherm();
 void spel();
 void lopen();
 void map();
+void blockFunc(int xWall, int yWall);
 static void nunchuck_setpowerpins();
 void nunchuck_init();
 void nunchuck_send_request();
