@@ -1,6 +1,0 @@
-﻿Compiling 'Touch_nun' for 'Arduino/Genuino Uno'
-Program size: 13.632 bytes (used 42% of a 32.256 byte maximum) (1,87 secs)
-Minimum Memory Usage: 649 bytes (32% of a 2048 byte maximum)
- 
-Uploading 'Touch_nun' to 'Arduino/Genuino Uno' using 'COM3'
-	The upload process has finished.
