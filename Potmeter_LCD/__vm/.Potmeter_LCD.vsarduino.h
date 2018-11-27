@@ -18,7 +18,6 @@
 #define ARDUINO 10805
 #define ARDUINO_AVR_UNO
 #define ARDUINO_ARCH_AVR
-void callback();
 int main(void);
 
 #include "pins_arduino.h" 

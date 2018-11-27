@@ -1,4 +1,3 @@
-#include <Timer1/TimerOne.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_ILI9341.h>
 #include <Adafruit_STMPE610.h>
@@ -18,26 +17,17 @@
 Adafruit_STMPE610 ts = Adafruit_STMPE610(STMPE_CS);
 Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC);
 
-void callback()		//Interrupt van Timer1
-{
-	Timer1.pwm(9, 128);
-}
-
 int main(void)
 {
 	init();
 	
-	//Setup Timer1
-	Timer1.initialize(1000000);
-	Timer1.attachInterrupt(callback);
-	DDRD   |= (1 << DDD3);
+	DDRD |= (1 << DDD3); 
+	
 
 	//Setup LCD
 	tft.begin();
-	tft.fillScreen(ILI9341_WHITE);
+	tft.fillScreen(ILI9341_RED);
 	BL_FULL;
-	
-	sei();
 	
 	while(1)
 	{
